@@ -1,31 +1,29 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-<head><meta name="generator" content="Hexo 3.9.0">
-    <meta charset="utf-8">
-    
-        <title>小绿本 | 林殊途BLOG</title>
-    
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
 
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<meta name="format-detection" content="telephone=no">
-<meta name="author" content="[object Object]">
-<meta name="designer" content="minfive">
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>小绿本 - 林殊途</title>
+
+
+    <meta name="description" content="IO多路复用的作用？以及实现机制 IO多路复用用于提升效率，单个进程可以同时监听多个网络连接IO。 例子： 通过一种机制，可以监视多个文件描述符，一旦描述符就绪（读写就绪），能通知程序进行相应的读写操作，IO多路复用就避免阻塞在io上，原本为多进程或多线程来接收多个连接的消息变为单进程或者单线程保存多个socket的状态后轮询处理。 select是通过系统调用来监视一组由多个文件描述组成的数组，通">
 <meta name="keywords" content="程序员, 全栈开发, python,">
-<meta name="description" content="学习、分享、交流">
-
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="format-detection" content="telephone=yes">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="robots" content="all">
-
-<link rel="canonical" href="http://chpl.top/linshutu.github.io/2019/09/06/小绿本_网络编程/index.html">
-
-<link rel="icon" type="image/png" href="/img/pl_favicon.ico" sizes="32x32">
-
-
-
+<meta property="og:type" content="article">
+<meta property="og:title" content="小绿本">
+<meta property="og:url" content="https://linshutu/linshutu.github.io/2019/09/06/小绿本_网络编程/index.html">
+<meta property="og:site_name" content="林殊途">
+<meta property="og:description" content="IO多路复用的作用？以及实现机制 IO多路复用用于提升效率，单个进程可以同时监听多个网络连接IO。 例子： 通过一种机制，可以监视多个文件描述符，一旦描述符就绪（读写就绪），能通知程序进行相应的读写操作，IO多路复用就避免阻塞在io上，原本为多进程或多线程来接收多个连接的消息变为单进程或者单线程保存多个socket的状态后轮询处理。 select是通过系统调用来监视一组由多个文件描述组成的数组，通">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://linshutu/images/og_image.png">
+<meta property="og:updated_time" content="2019-09-06T17:02:16.507Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小绿本">
+<meta name="twitter:description" content="IO多路复用的作用？以及实现机制 IO多路复用用于提升效率，单个进程可以同时监听多个网络连接IO。 例子： 通过一种机制，可以监视多个文件描述符，一旦描述符就绪（读写就绪），能通知程序进行相应的读写操作，IO多路复用就避免阻塞在io上，原本为多进程或多线程来接收多个连接的消息变为单进程或者单线程保存多个socket的状态后轮询处理。 select是通过系统调用来监视一组由多个文件描述组成的数组，通">
+<meta name="twitter:image" content="https://linshutu/images/og_image.png">
 
 
 
@@ -33,123 +31,144 @@
 
 
 
+<link rel="icon" href="/images/favicon.svg">
 
 
-
-
-<!-- Prefetch -->
-
-
-
-
-
-
-<!-- CSS -->
-<link rel="stylesheet" href="/scss/base/index.css">
-
-<!-- RSS -->
-<link rel="alternate" href="/atom.xml" title="林殊途">
-
-<!-- 统计 -->
-<!-- 百度统计 -->
-
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
 
 
     
     
-    <link rel="stylesheet" href="/scss/views/page/post.css">
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
 
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
 </head>
-<body ontouchstart>
-    
-        <!-- loading 页面 -->
-<div id="page-loading" class="page page-loading" style="background-image: url('/img/loading.gif')"></div>
-    
-
-    <div id="page" class="page js-hidden">
-        
-    <!-- 页头 -->
-<header class="page__small-header page__header--small">
-    <nav class="page__navbar">
-        <div class="page__container navbar-container">
-            <a class="page__logo" href="/" title="林殊途" alt="林殊途">
-                <img src="/img/logo.png" alt="林殊途">
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/img/logo.svg" alt="小绿本" height="28">
+            
             </a>
-
-            <nav class="page__nav">
-                <ul class="nav__list clearfix">
-                    
-                        
-                        <li class="nav__item">
-                            <a href="/" alt="首页" title="首页">首页</a>
-                        </li>
-                    
-                        
-                        <li class="nav__item">
-                            <a href="/archives" alt="归档" title="归档">归档</a>
-                        </li>
-                    
-                        
-                        <li class="nav__item">
-                            <a href="/about" alt="关于" title="关于">关于</a>
-                        </li>
-                    
-                </ul>
-            </nav>
-
-            <button class="page__menu-btn" type="button">
-                <i class="iconfont icon-menu"></i>
-            </button>
         </div>
-    </nav>
-</header>
-
-
-        
-    <main class="page__container page__main">
-    <div class="page__content">
-        <article class="page__post">
-    <div class="post__cover">
-        <img src="/img/under.jpg" alt="小绿本">
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
     </div>
-
-    <header class="post__info">
-        <h1 class="post__title">小绿本</h1>
-
-        <div class="post__mark">
-            <div class="mark__block">
-                <i class="mark__icon iconfont icon-write"></i>
-                <ul class="mark__list clearfix">
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-09-05T16:46:53.928Z">2019-09-06</time>
+                
+                
+                <span class="level-item has-text-grey">
                     
-                        <li class="mark__item">
-                            <a href="https://chpl.tpo">pl</a>
-                        </li>
                     
-                </ul>
+                    24 分钟 read (About 3661 words)
+                </span>
+                
+                
             </div>
-            
-            <div class="mark__block">
-                <i class="mark__icon iconfont icon-time"></i>
-                <ul class="mark__list clearfix">
-                    <li class="mark__item"><span>2019-09-06</span></li>
-                </ul>
-            </div>
-
-            <div class="mark__block">
-                <i class="mark__icon iconfont icon-tab"></i>
-                <ul class="mark__list clearfix">
-                    
-                </ul>
-            </div>
-
-            
         </div>
-    </header>
-
-    <div class="post__content">
-        <p><strong>IO多路复用的作用？以及实现机制</strong></p>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                小绿本
+            
+        </h1>
+        <div class="content">
+            <p><strong>IO多路复用的作用？以及实现机制</strong></p>
 <p>IO多路复用用于提升效率，单个进程可以同时监听多个网络连接IO。</p>
 <p>例子：</p>
 <p>通过一种机制，可以监视多个文件描述符，一旦描述符就绪（读写就绪），能通知程序进行相应的读写操作，IO多路复用就避免阻塞在io上，原本为多进程或多线程来接收多个连接的消息变为单进程或者单线程保存多个socket的状态后轮询处理。</p>
@@ -194,248 +213,619 @@
 
 <p>正向代理是客户端的角度出发，服务特定的用户（比如局域网内的可以），以访问非特定的服务；反向代理正好相反，从服务端的角度出发，服务于非特定用户（通常是所有用户），以访问特定的服务。</p>
 
-
-        
-        <div class="post-announce">
-            感谢您的阅读，本文由
-            <a href="http://chpl.top/linshutu.github.io">林殊途</a>
-            版权所有。如若转载，请注明出处：林殊途（<a href="http://chpl.top/linshutu.github.io/2019/09/06/小绿本_网络编程/">http://chpl.top/linshutu.github.io/2019/09/06/小绿本_网络编程/</a>）
         </div>
         
+        
+        
+    </div>
+</div>
 
-        <div class="post__prevs">
-            <div class="post__prev">
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">Like this article? Support the author with</h3>
+        <div class="buttons is-centered">
+            
                 
-                <a href="/2019/09/04/hello-world/" title="Hello World"><i class="iconfont icon-prev"></i>Hello World</a>
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
                 
-            </div>
-            <div class="post__prev post__prev--right">
                 
-            </div>
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
         </div>
     </div>
-</article>
+</div>
 
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
         
         
-    </div>
-
-    <aside class="page__sidebar">
-    <!-- 
-        <div class="sidebar__img">
-            <img src="/img/under.gif" alt="林殊途" title="林殊途">
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/09/04/hello-world/">
+                <span class="level-item">Hello World</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-     -->
-
-    <form id="page-search-from" class="page__search-from" action="/search/">
-        <label class="search-form__item">
-            <input class="input" type="text" name="search" placeholder="Search...">
-            <i class="iconfont icon-search"></i>
-        </label>
-    </form>
-
-    
-        <div class="sidebar__block">
-            <h3 class="block__title">简介</h3>
-            <p class="block__text">学习、分享、交流</p>
-        </div>
-    
-
-    <div class="sidebar__block">
-        <h3 class="block__title">文章分类</h3>
         
     </div>
-    
-    <div class="sidebar__block">
-        <h3 class="block__title">最新文章</h3>
-        
-        <ul class="block-list latest-post-list">
-            
-                    <li class="latest-post-item">
-                        <a href="/2019/09/06/小绿本_网络编程/" title="小绿本">
-                            <div class="item__cover">
-                                <img src="/img/under.jpg" alt="小绿本">
-                            </div>
-                            <div class="item__info">
-                                <h3 class="item__title">小绿本</h3>
-                                <span class="item__text">2019-09-06</span>
-                            </div>
-                        </a>
-                    </li>
+</div>
+
+
+</div>
                 
-                    <li class="latest-post-item">
-                        <a href="/2019/09/04/hello-world/" title="Hello World">
-                            <div class="item__cover">
-                                <img src="/img/under.jpg" alt="Hello World">
-                            </div>
-                            <div class="item__info">
-                                <h3 class="item__title">Hello World</h3>
-                                <span class="item__text">2019-09-04</span>
-                            </div>
-                        </a>
-                    </li>
-                
-        </ul>
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
-    </div>
-
-    <div class="sidebar__block">
-        <h3 class="block__title">文章标签</h3>
         
-        <ul class="block-list tag-list clearfix">
-            
-        </ul>
-    
-    </div>
-
-    <!-- <div class="sidebar__block">
-        <h3 class="block__title">友情链接</h3>
-        <ul class="block-list">
-            
-        </ul>
-    </div> -->
-</aside>
-</main>
-
-
-        
-            <!-- 页脚 -->
-<footer class="page__footer">
-    <section class="footer__top">
-        <div class="page__container footer__container">
-            
-            <div class="footer-top__item footer-top__item--2">
-                <h3 class="item__title">关于</h3>
-                <div class="item__content">
-                    <p class="item__text">本站是基于 Hexo 搭建的静态资源博客，主要用于分享日常学习、生活及工作的一些心得总结，欢迎点击右下角订阅 rss。</p>
-                    <ul class="footer__contact-info">
-                        <li class="contact-info__item">
-                            <i class="iconfont icon-address"></i>
-                            <span>Beijing, Beijing City, China</span>
-                        </li>
-                        <li class="contact-info__item">
-                            <i class="iconfont icon-email2"></i>
-                            <span>1649947109@qq.com</span>
-                        </li>
-                    </ul>
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img  src="/images/avatar.png" alt="林殊途">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        林殊途
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        林中多歧路，殊途同归
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Beijing China</span>
+                    </p>
+                    
                 </div>
             </div>
-
-            
-            
-                <div class="footer-top__item footer__image">
-                    <img src="/img/under.gif" alt="logo" title="林殊途">
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        2
+                    </p>
                 </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        0
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        0
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/linshutu" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
             
-            
-            
-            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/ppoffice">
                 
-                    <div class="footer-top__item">
-                        <h3 class="item__title">友情链接</h3>
-                        <div class="item__content">
-                            <ul class="footer-top__list">
-                                
-                                    <li class="list-item">
-                                        <a href="https://chpl.top" title="hexo-theme-skapp" target="_blank">hexo-theme-skapp</a>
-                                    </li>
-                                
-                            </ul>
-                        </div>
-                    </div>
+                <i class="fab fa-github"></i>
                 
-                    <div class="footer-top__item">
-                        <h3 class="item__title">构建工具</h3>
-                        <div class="item__content">
-                            <ul class="footer-top__list">
-                                
-                                    <li class="list-item">
-                                        <a href="https://hexo.io/" title="Blog Framework" target="_blank">Hexo</a>
-                                    </li>
-                                
-                            </ul>
-                        </div>
-                    </div>
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
                 
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
             
         </div>
-    </section>
-    <section class="footer__bottom">
-        <div class="page__container footer__container">
-            <p class="footer__copyright">©
-                <a href="https://github.com/Mrminfive/hexo-theme-skapp" target="_blank">Skapp</a> 2017 powered by
-                <a href="http://hexo.io/" target="_blank">Hexo</a>, made by 
-                <a href="https://github.com/Mrminfive" target="_blank">minfive</a>.
-            </p>
-            <ul class="footer__social-network clearfix">
-                
-                
-                    <li class="social-network__item">
-                        <a href="https://chpl.top" target="_blank" title="github">
-                            <i class="iconfont icon-github"></i>
-                        </a>
-                    </li>
-                
-                    <li class="social-network__item">
-                        <a href="mailto:1649947109@qq.com" target="_blank" title="email">
-                            <i class="iconfont icon-email"></i>
-                        </a>
-                    </li>
-                
-                    <li class="social-network__item">
-                        <a href="/atom.xml" target="_blank" title="rss">
-                            <i class="iconfont icon-rss"></i>
-                        </a>
-                    </li>
-                
-                
+        
+    </div>
+</div>
+    
+        
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://hexo.io" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Hexo</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">hexo.io</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/linshutu" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">PPOffice</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            
             </ul>
         </div>
-    </section>
-</footer>
-        
-
-        
-            <!-- 返回顶部 -->
-<div id="back-top" class="back-top back-top--hidden js-hidden">
-    <i class="iconfont icon-top"></i>
+    </div>
 </div>
+    
+        
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/06/小绿本_网络编程/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="小绿本">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-05T16:46:53.928Z">2019-09-06</time></div>
+                    <a href="/2019/09/06/小绿本_网络编程/" class="title has-link-black-ter is-size-6 has-text-weight-normal">小绿本</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/04/hello-world/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-04T01:24:17.906Z">2019-09-04</time></div>
+                    <a href="/2019/09/04/hello-world/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hello World</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
         
     </div>
+</div>
 
-    <!-- build:js /js/common.js -->
-        <script type="text/javascript" src="js/common/utils.js"></script>
-        <script type="text/javascript" src="js/common/pack.js"></script>
-        <script type="text/javascript" src="js/common/animation.js"></script>
-        <script type="text/javascript" src="js/layout/loading.js"></script>
-        <script type="text/javascript" src="js/layout/header.js"></script>
-        <script type="text/javascript" src="js/layout/back-top.js"></script>
-        <script type="text/javascript" src="js/layout/post.js"></script>
-    <!-- endbuild -->
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/09/06/小绿本_网络编程/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="小绿本">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-05T16:46:53.928Z">2019-09-06</time></div>
+                    <a href="/2019/09/06/小绿本_网络编程/" class="title has-link-black-ter is-size-6 has-text-weight-normal">小绿本</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/09/04/hello-world/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-09-04T01:24:17.906Z">2019-09-04</time></div>
+                    <a href="/2019/09/04/hello-world/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Hello World</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
 
     
-    <script src="/js/page/post.js"></script>
-
-
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+            </div>
+        </div>
+    </div>
+</div>
     
     
+</div>
 
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/img/logo.svg" alt="小绿本" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 [object Object]&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/linshutu">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-cn");</script>
 
-
-    <!-- 不蒜子统计 -->
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
 </script>
 
 
-     
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
 
 
 
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
 
 
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
 
 
+    
+    
 
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
 </body>
 </html>
